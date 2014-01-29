@@ -1,2 +1,51 @@
 \newpage
 \section{Concurrency}
+
+\subsection{Parallel Threads}
+MyThread kann eine beliebige Klasse sein.
+\begin{lstlisting}[style=Csharp]
+    MyThread th1 = new MyThread(1);
+    Thread T1 = new Thread(th1.doIt);
+    T1.Start();
+\end{lstlisting}
+
+\subsection{Semaphores}
+Mehrere Threads greifen auf gleichen Counter zu, dieser wird deshalb mit Semaphore geschützt.
+\begin{lstlisting}[style=Csharp]
+    class Count
+    {
+        private int CounterNr;
+        static int cVal = 0;
+        private static Semaphore sem;
+
+        public Count(int i)
+        {
+            sem = new Semaphore(1, 1);
+            CounterNr = i;
+            Console.WriteLine("+++ Thread {0} started.", CounterNr);
+        }
+
+        public void Increment()
+        {
+            while (true)
+            {
+                sem.WaitOne();
+                int buf = cVal;
+                if (buf == 20)
+                {
+                    Console.WriteLine("+++ Thread {0} is finished.", CounterNr);
+                    sem.Release();
+                    break;
+                }
+
+                cVal = buf + 1;
+                Console.WriteLine("--- Thread {0} was here. New: {1}", CounterNr, cVal);
+                sem.Release();
+
+                Random r = new Random();
+                Thread.Sleep(r.Next(400));
+            }
+        }
+
+    }
+\end{lstlisting}
