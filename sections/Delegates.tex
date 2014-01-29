@@ -1,0 +1,66 @@
+\section{Delegates}
+Delegate erstellen:
+\begin{lstlisting}[style=Csharp]
+	 delegate void LogWriter(string message);
+\end{lstlisting}
+
+Klasse FileLogger 
+\begin{lstlisting}[style=Csharp]
+    public class FileLogger
+    {
+        private StreamWriter w;
+
+        public FileLogger(string path)
+        {
+            w = File.CreateText(path);
+        }
+
+        public void Print(string msg)
+        {
+            w.WriteLine(msg);
+        }
+
+        public void Flush()
+        {
+            w.Flush();
+        }
+
+        public void Close()
+        {
+            w.Close();
+        }
+    }
+\end{lstlisting}
+
+Klasse Test:
+\begin{lstlisting}[style=Csharp]
+	public class Test
+	{
+
+	    // Klassenvariable vom Typ "LogWriter" erstellen (Name Log)
+	    private static LogWriter Log;
+	
+	    // Methode "Print" fuer Ausgabe auf dem Bildschirm erstellen
+	    private static void Print(string s)
+	    {
+	        Console.WriteLine(s);
+	    }
+	
+	    public static void Main(string[] arg)
+	    {
+	        // Logger Instanz erstellen
+	        FileLogger logger = new FileLogger("U:/log.txt");
+	
+	        // Event fuer Ausgabe auf dem Bildschirm anmelden
+	        Log += Print;
+	        // Event fuer Ausgabe in File anmelden
+	        Log += logger.Print; 
+	
+	        // Logeintraege erstellen
+	        Log("Log. Loglog.");
+	
+	        // Buffer der "Logger" Instanz schreiben und danach schliessen
+	        logger.Flush();
+	        logger.Close();
+	    }
+ \end{lstlisting}
