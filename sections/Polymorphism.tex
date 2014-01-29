@@ -1,0 +1,33 @@
+\newpage
+\section{Polymorphismus}
+
+\subsection{Interfaces}
+Definition des Interface: 
+
+\begin{lstlisting}[style=Csharp]
+public interface IGObject
+{
+    void Draw();
+    void WhoAreYou();
+}
+\end{lstlisting}
+
+Umsetzung des Interface:
+\begin{lstlisting}[style=Csharp]
+class Kreis : IGObject
+{
+    protected string name;
+
+    public Kreis(string name) { this.name = name; }
+
+    public void Draw()
+    {
+        Console.WriteLine("Kreis: {0}", name);
+    }
+        
+    public void WhoAreYou()
+    {
+        Console.WriteLine("Kreis: {0}", name);
+    }
+}
+\end{lstlisting}
