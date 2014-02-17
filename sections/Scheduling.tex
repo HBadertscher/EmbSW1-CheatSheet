@@ -1,0 +1,49 @@
+\section{Scheduling}
+
+\subsection{Auslastung / Utilization}
+\begin{multicols}{2}
+
+	$u_i = \frac{e_i}{p_i}$ \\
+	
+	mit \\
+	$u_i$: Ausführungsfaktor des Task $i$ \\
+	$e_i$: Executionzeit des Task $i$ \\
+	$p_i$: Periodenzeit des Task $i$ \\
+
+	
+	Gesamtauslastung $U$ für $n$ periodische Tasks:
+	\begin{equation*}
+		U = \sum\limits_{i=1}^{n} u_i = \sum\limits_{i=1}^{n} \frac{e_i}{p_i}
+	\end{equation*}
+
+	\adjustbox{width=0.9\linewidth}{
+	\begin{tabular}{|l|l|l|} \hline
+		\textbf{Utilization (\%)} & \textbf{Zone Type} & \textbf{Typical Application} \\ \hline
+		0-25 & excess processing power & various \\
+		26-50 & very safe & various \\
+		51-68 & safe & various \\
+		69 & theoretical limit & embedded systems \\
+		70-82 & questionable & embedded systems \\
+		83-99 & dangerous & embedded systems \\
+		100+ & overload & stressed systems \\ \hline
+	\end{tabular}}
+
+
+\columnbreak
+
+\subsection{Rate monotonic scheduling}
+
+Systemauslastung $U$ bei $n$ periodischen Tasks muss kleiner sein als: \\
+
+\begin{equation*}
+	U \leq n \cdot \left( 2^{\frac{1}{n}} - 1\right)
+\end{equation*}
+
+\begin{tabularx}{0.8\linewidth}{|p{1cm}|X||p{1cm}|X|} \hline
+	$\mathbf{n}$ & $\mathbf{U [ \% ]}$ & $\mathbf{n}$ & $\mathbf{U [ \% ]}$ \\ \hline \hline
+	$2$ & $82.4$ & $5$ & $74.4$ \\
+	$3$ & $78.0$ & $10$ & $71.1$ \\
+	$4$ & $75.7$ & $\infty$ & $\ln 2 \approx 69.3$ \\ \hline
+\end{tabularx}
+
+\end{multicols}

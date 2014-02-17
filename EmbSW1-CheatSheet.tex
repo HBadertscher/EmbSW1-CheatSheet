@@ -5,6 +5,8 @@
 
 \input{header/listings}
 
+\usepackage{adjustbox}
+
 \setDefaultArrayStretch{1.8}
 
 \title{EmbSW1 - CheatSheet}
@@ -13,12 +15,13 @@
 
 
 \lstset{style=Csharp}
+\setcounter{tocdepth}{2}
 
 \maketitle
 \tableofcontents
 \newpage
 
-%TODO: Scheduling (inkl. genauen Tabellen)
+\input{sections/Scheduling}
 \input{sections/FSM}
 \input{sections/ILDASM}
 \input{sections/Polymorphism}
